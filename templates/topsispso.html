@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PSO</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<div class="flex justify-center">
+    <section class="mt-10">
+        <div >
+            <div class="max-w-2xl mx-auto bg-white p-8">
+                <form onsubmit="handleSubmit(event)" class="rounded-xl bg-white px-8 py-10 shadow-2xl ">
+                    <h1 class="font-semibold mb-3">Ingrese parámetros de control</h1>
+                    <div class="grid gap-6 mb-6 lg:grid-cols-2">
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">C1</label>
+                            <input type="number" step="any" name="w" onchange="handleInputChange(event)" class="bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern=""/>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">C2</label>
+                            <input type="number" step="any" name="c1" onchange="handleInputChange(event)" class="bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">C3</label>
+                            <input type="number" step="any" name="c2" onchange="handleInputChange(event)" class="bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">C4</label>
+                            <input type="number" step="any" name="c2" onchange="handleInputChange(event)" class="bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">C5</label>
+                            <input type="number" step="any" name="c2" onchange="handleInputChange(event)" class="bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Peso de Incercia</label>
+                            <input type="number" step="any" name="e" onchange="handleInputChange(event)" class="bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">C1:</label>
+                            <input type="text" value="" disabled class="bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">C2:</label>
+                            <input type="text" value="" disabled class="bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 ">Cantidad de Iteraciones: </label>
+                        <input type="number" placeholder="Ri= (t^-i)/(t^+i+t^-i), i=1,...,m" disabled class="text-center bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                    </div>
+                    <div>
+                        <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 ">Función objetivo: </label>
+                        <input type="number" placeholder="Ri= (t^-i)/(t^+i+t^-i), i=1,...,m" disabled class="text-center bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                    </div>
+                    <button type="submit" class="text-black  mt-5 hover:bg-blue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-slate-400">Calcular</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="mt-10">
+        <div>
+            <div class="max-w-2xl mx-auto bg-white p-8">
+                <form class="rounded-xl bg-white px-8 py-10 shadow-2xl ">
+                    <h1 class="font-semibold mb-3">Resultados finales</h1>
+                    <div class="grid mt-4 gap-6 mb-6 lg:grid-cols-2">
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Última iteración</label>
+                            <input type="text" value="" disabled class="text-center bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Mejor actualmente: </label>
+                            <input type="text" value="" disabled class="text-center bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Mejor de momento</label>
+                            <input type="text" value="" disabled class="text-center bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Mejor posición local: </label>
+                            <input type="text" value="" disabled class="text-center bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Mejor posición en general: </label>
+                            <input type="text" value="" disabled class="text-center bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="mt-10">
+        <div>
+            <div class="max-w-2xl mx-auto bg-white p-8">
+                <form class="rounded-xl bg-white px-8 py-10 shadow-2xl">
+                    <div class="grid mt-4 gap-6 mb-6">
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Cantidad de Iteraciones: </label>
+                            <input type="text" value="" disabled class="text-center bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Hora de inicio</label>
+                            <input type="text" value="" disabled class="text-center bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Hora de finalización</label>
+                            <input type="text" value="" disabled class="text-center bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Tiempo de ejecución</label>
+                            <input type="text" value="" disabled class="text-center bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" pattern="" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="items-center">
+            <button onclick="downloadXLSX()" class="text-black mt-5 ml-9 hover:bg-blue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-slate-400">Descargar XLSX</button>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    function handleSubmit(event) {
+        event.preventDefault();
+        console.log("Formulario enviado");
+    }
+
+    function handleInputChange(event) {
+        const { name, value } = event.target;
+        console.log(name, value);
+    }
+
+    function downloadXLSX() {
+        console.log("Descargar XLSX");
+        // Agrega aquí la lógica para descargar el archivo XLSX
+    }
+</script>
+
+</body>
+</html>
