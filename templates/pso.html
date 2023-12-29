@@ -8,31 +8,66 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
   <body>
-    <div class="mt-1">
-      <a
-        href="/pso"
-        class="text-lg font-bold mx-auto p-8 transition-all duration-100 ease-in-out hover:font-bold nav-link"
-      >
-        PSO
-      </a>
-      <a
-        href="/moorapso"
-        class="text-lg mx-auto p-8 transition-all duration-100 ease-in-out hover:font-bold nav-link"
-      >
-        MOORA - PSO
-      </a>
-      <a
-        href="/dapso"
-        class="text-lg mx-auto p-8 transition-all duration-100 ease-in-out hover:font-bold nav-link"
-      >
-        DA - PSO
-      </a>
-      <a
-        href="/topsispso"
-        class="text-lg mx-auto p-8 transition-all duration-100 ease-in-out hover:font-bold nav-link"
-      >
-        TOPSIS - PSO
-      </a>
+    <div class="bg-white pt-8">
+        <div class="container mx-auto rounded-xl bg-white px-8 py-10 shadow-2xl">
+            <h1 class="text-center text-3xl font-semibold capitalize text-gray-800 lg:text-4xl">Optimización de Enjambre de partículas (PSO)</h1>
+            <p class="mt-6 text-justify">
+                La Optimización por Enjambre de Partículas (PSO, por sus siglas en inglés, Particle Swarm Optimization) es un fascinante algoritmo de
+                optimización inspirado en el comportamiento de enjambres y bandadas de aves en la naturaleza. Desarrollado en 1995 por James Kennedy
+                y Russell Eberhart, el PSO se ha convertido en una valiosa técnica para encontrar soluciones aproximadas a problemas de optimización
+                en espacios multidimensionales, donde se busca el valor mínimo o máximo de una función. <a id="enlace" href="https://ieeexplore.ieee.org/document/494215" class="text-cyan-400">Leer más</a>
+            </p>
+        </div>
+    </div>
+    
+    <div class="mt-16 text-center mx-auto max-w-5xl overflow-hidden rounded-xl bg-white">
+        <div class="flex justify-center">
+            <section class="mt-20">
+                <div class="mx-auto max-w-lg">
+                    <!-- <h1 class="text-3xl font-bold text-gray-800 lg:text-4xl"></h1> -->
+                </div>
+                <div class="container mx-auto rounded-xl bg-white px-8 py-10 shadow-2xl">
+                    <h1 class="text-center text-3xl font-semibold capitalize text-gray-800 lg:text-4xl">
+                        ¿Cómo funciona el algoritmo PSO? Aquí te lo explicamos:
+                    </h1>
+                    <p class="text-justify text-gray-500">
+                        <div class="mt-10">
+                            <li><strong>Partículas:</strong></li>
+                            <h2>
+                                En el corazón del PSO se encuentra una población de "partículas" virtuales,
+                                cada una representando una solución candidata al problema de optimización.
+                                Estas partículas se colocan inicialmente de manera aleatoria en el espacio de búsqueda.
+                            </h2>
+                            <!-- ... (otros elementos li y h2) ... -->
+                        </div>
+                    </p>
+                    <div class="container mx-auto px-6 py-10">
+                        <p class="mt-6 text-gray-500 text-justify">
+                            El PSO es especialmente efectivo en problemas de optimización continua y multidimensional, como la
+                            optimización de funciones matemáticas complejas o la sintonización de parámetros en algoritmos de
+                            aprendizaje automático. Su capacidad para mantener un equilibrio entre la exploración y la explotación
+                            lo hace útil en una amplia gama de aplicaciones, desde la ingeniería hasta la optimización de carteras
+                            de inversión y la búsqueda de rutas óptimas. Este enfoque, inspirado en la naturaleza, ha demostrado ser
+                            una valiosa herramienta en la resolución de problemas de optimización.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="mt-1 flex items-center justify-center">
+        <a href="/pso" class="text-lg font-bold p-8 transition-all duration-100 ease-in-out hover:font-bold nav-link">
+            PSO
+        </a>
+        <a href="/moorapso" class="text-lg p-8 transition-all duration-100 ease-in-out hover:font-bold nav-link">
+            MOORA - PSO
+        </a>
+        <a href="/dapso" class="text-lg p-8 transition-all duration-100 ease-in-out hover:font-bold nav-link">
+            DA - PSO
+        </a>
+        <a href="/topsispso" class="text-lg p-8 transition-all duration-100 ease-in-out hover:font-bold nav-link">
+            TOPSIS - PSO
+        </a>
     </div>
 
     <div class="flex justify-center">
