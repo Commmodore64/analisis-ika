@@ -1,21 +1,22 @@
-from flask import Flask, render_template, session, make_response, jsonify, request
-from functools import wraps
-import jwt
+import asyncio
+import hashlib
+import re
+from array import array
 from datetime import datetime, timedelta
 from functools import wraps
-from array import array
+
+import jwt
+import mysql.connector
 import numpy as np
+from flask import (Flask, jsonify, make_response, render_template, request,
+                   session)
+from flask_sqlalchemy import SQLAlchemy
 from numpy import ndarray
 from openpyxl import load_workbook
-import mysql.connector
-from flask_sqlalchemy import SQLAlchemy
-import re
-import hashlib
+
 #importacion de algoritmos
 from pso import ejecutar_pso
 from topsispso import ejecutar_topsispso
-
-import asyncio
 
 db = SQLAlchemy()
 app = Flask(__name__)
@@ -88,6 +89,42 @@ def calcular_pso():
        print(f'Error en calcular_pso: {str(e)}')
     return jsonify({'error': 'Ocurrió un error en el servidor'}), 500
 
+@app.route('/moorapso', methods=['POST'])
+def calcular_moorapso():
+    try:
+        # Obtén los datos del formulario
+        w_input = [request.form.get(f'w[{i}]', '') for i in range(5)]
+        w = [float(value) for value in w_input if value != '']  # Filtra valores vacíos
+        wwi = float(request.form['wwi'])
+        c1 = float(request.form['c1'])
+        c2 = float(request.form['c2'])
+        T = int(request.form['T'])
+        # Divide las cadenas de texto en listas
+        r1_input = request.form['r1']
+        r2_input = request.form['r2']
+        r1 = [float(num.strip()) for num in r1_input.split(',')]
+        r2 = [float(num.strip()) for num in r2_input.split(',')]
+
+        # Llama a la función de PSO en pso.py
+        nuevosDatos = asyncio.run(ejecutar_pso(w, wwi, c1, c2, T, r1, r2))
+        print("Resultados de la ejecución:", nuevosDatos)
+
+        # Obtén los resultados específicos que deseas mostrar
+        # dataGBP = resultados['dataGBP']
+        # dataGBF = resultados['dataGBF']
+        # dataResult = resultados['dataResult']
+
+        # Puedes hacer lo que quieras con los resultados, por ejemplo, pasarlos al template
+        return jsonify(nuevosDatos)
+    except Exception as e:
+        # Manejo de errores, por ejemplo, mostrar un mensaje de error en la interfaz
+       print(f'Error en calcular_pso: {str(e)}')
+    return jsonify({'error': 'Ocurrió un error en el servidor'}), 500
+
+
+@app.route('/moorapso')
+def moorapso():
+    return render_template('moorapso.html')
 
 @app.route('/topsispso')
 def topsispso():
@@ -430,9 +467,9 @@ def index():
 
 @app.route('/')
 def home():
-    if not session.get('logged_in'):
-        return render_template('login.html')
-    else:
+    # if not session.get('logged_in'):
+    #     return render_template('login.html')
+    # else:
         return render_template('index.html')
 
 @app.route('/login', methods=['GET', 'POST'])
